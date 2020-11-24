@@ -1,5 +1,7 @@
 ---
 title: "Historical horse population in Canada"
+params:
+  province: "Alberta"
 output: github_document
 ---
 
@@ -66,7 +68,7 @@ knitr::kable(max_horses,
              caption = "Table1. Max and min number of horse for each province between 1940 - 1972")
 ```
 
-Below we zoom in and look at the province of Alberta:
+Below we zoom in and look at the province of `r params$province`:
 
 ```{r plot province, fig.width=5, fig.height=4, fig.cap="Figure 1. Horse populations for all provinces in Canada between 1940 - 1972", out.width="50%"}
 province_plot <- horse_pop %>% 
