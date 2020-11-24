@@ -6,6 +6,7 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+library(knitr)
 ```
 
 ## Aim
@@ -45,7 +46,7 @@ horse_plot <- ggplot(horse_pop, aes(x = Ref_Date, y = Value)) +
   facet_grid(~GEO) +
   scale_y_continuous(labels = scales::comma) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
-horse_plot
+  horse_plot
 ```
 
 We can see from the visualisation above that Ontario, Saskatchewan and Alberta have had the highest horse populations in Canada. All provinces have had a decline in horse
@@ -54,14 +55,15 @@ industry after the Great Depression and the Second World War. An interesting fol
 
 Next we look at the range of the number horses for each provinces at any time point between 1940 - 1972:
 
-```{r max horse table}
+```{r max horse table, message= FALSE}
 max_horses <- horse_pop %>% 
   select(GEO, Value) %>% 
   rename(Province = GEO) %>% 
   group_by(Province) %>% 
   summarize(Maximum = max(Value),
             Minimum = min(Value))
-max_horses
+knitr::kable(max_horses, 
+             caption = "Table1. Max and min number of horse for each province between 1940 - 1972")
 ```
 
 Below we zoom in and look at the province of Alberta:
